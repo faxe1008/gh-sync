@@ -1,0 +1,18 @@
+name: Sync Upstream LVGL
+
+on:
+  schedule:
+    - cron: "*/5 * * * *" # Runs every 5 minutes
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  sync-lvgl:
+    uses: ./.github/workflows/sync-module.yml
+    with:
+      module_name: "lvgl"
+      upstream_repository: "https://github.com/lvgl/lvgl"
+      upstream_branch: "master"
+      target_repository: "faxe1008/zephyr-lvgl"
+      target_branch: "master"
+    secrets:
+      PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
